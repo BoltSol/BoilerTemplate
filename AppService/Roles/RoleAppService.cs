@@ -21,11 +21,9 @@ namespace AppService.Roles
     {
         private readonly IRepository<Role, long> _roleRepository;
         private readonly IRepository<User, long> _userRepository;
-        private readonly IMapper _mapper;
         #region Parameter
-        public RoleAppService(IMapper mapper, IRepository<Role, long> roleRepository, IRepository<User, long> userRepository)
+        public RoleAppService(IRepository<Role, long> roleRepository, IRepository<User, long> userRepository)
         {
-            this._mapper = mapper;
             this._roleRepository = roleRepository;
             this._userRepository = userRepository;
         }
@@ -38,8 +36,8 @@ namespace AppService.Roles
             users.Password = "user123";
             _userRepository.InsertOrUpdateAndGetId(users);
 
-            var testNestedObj = _mapper.Map<List<UserDto>>(users);
-            return _mapper.Map<List<RoleDto>>(roles);
+            var testNestedObj = users.MapTo<UserDto>();
+            return roles.MapTo<List<RoleDto>>();
         }
     }
 }

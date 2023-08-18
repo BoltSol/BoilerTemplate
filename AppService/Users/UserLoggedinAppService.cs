@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using AppDomain;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using AppService.Common;
 
 namespace AppService.Users
 {
@@ -20,11 +21,9 @@ namespace AppService.Users
     public class UserLoggedinAppService : IUserLoggedinAppService
     {
         private readonly IRepository<User, long> _userRepository;
-        private readonly IMapper _mapper;
         #region Parameter
-        public UserLoggedinAppService(IMapper mapper, IRepository<User, long> userRepository)
+        public UserLoggedinAppService(IRepository<User, long> userRepository)
         {
-            this._mapper = mapper;
             this._userRepository = userRepository;
         }
         #endregion
@@ -47,7 +46,7 @@ namespace AppService.Users
                 output.Claims.Add(new Claim(ClaimTypes.Role, uRole.Role.Name));
             }
 
-            output.User = _mapper.Map<UserDto>(user);
+            output.User = user.MapTo<UserDto>();
             return output;
         }
     }

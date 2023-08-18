@@ -38,6 +38,7 @@ namespace WebApp
             });
 
             var mapper=configuration.CreateMapper();
+            AutoMapExtensions.Configure(mapper);
             services.AddSingleton(mapper);
 
             services.AddControllersWithViews();
