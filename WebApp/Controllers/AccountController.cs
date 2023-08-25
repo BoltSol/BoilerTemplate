@@ -33,7 +33,7 @@ namespace WebApp.Controllers
 
         [HttpPost]
         public async Task<IActionResult> SignIn(UserLoggedinInputDto input, string returnUrl = "")
-        {
+            {
             var userLoggedin = await _userLoggedinAppService.UserAuthenticate(input);
             if (userLoggedin is null) return RedirectToAction("SignIn");
 
@@ -46,7 +46,7 @@ namespace WebApp.Controllers
                     AllowRefresh = true,
                     ExpiresUtc = DateTime.UtcNow.AddDays(7),
                     IsPersistent = input.IsPersistent,
-                    RedirectUri = Constants.BaseUrl + "Account/Logout"
+                    RedirectUri = Constants.BaseUrl + "Account/SignOut"
                 });
 
                 if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
@@ -64,7 +64,6 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> SignOut()
         {
-            HttpContext.Session.Clear();
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("SignIn");
         }

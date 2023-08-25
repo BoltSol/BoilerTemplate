@@ -16,17 +16,14 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IRoleAppService _roleAppService;
 
-        public HomeController(IRoleAppService roleAppService, ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger)
         {
-            this._roleAppService = roleAppService;
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var test = await _roleAppService.GetAllRoles();
             return View();
         }
 

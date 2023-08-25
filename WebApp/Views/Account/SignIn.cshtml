@@ -1,9 +1,8 @@
-﻿@using Newtonsoft.Json
-@model AppService.Users.UserLoggedinInputDto
+﻿@model AppService.Users.UserLoggedinInputDto
 @{
     ViewData["Title"] = "SignIn";
     Layout = null;
-    var returnUrl = Context.Request.Query["returnurl"];
+    var returnUrl = Context.Request.Query["ReturnUrl"];
 }
 <!DOCTYPE html>
 <!--

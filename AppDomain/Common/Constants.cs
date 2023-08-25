@@ -11,7 +11,7 @@ namespace AppDomain.Common
         public const string Role_Admin_User = "Admin,User";
         public const string SecurityKey = "QWERTYUIOPASDFGHMNBVCXZLKJH";
         public const string AlphaNumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        public const string BaseUrl = "https://localhost:44387/";
+        public const string BaseUrl = "https://localhost:44374/";
 
     }
 }

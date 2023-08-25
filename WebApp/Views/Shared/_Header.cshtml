@@ -1,4 +1,9 @@
-﻿<!-- BEGIN HEADER -->
+﻿@using System.Security.Claims
+@{
+
+    var userEmail = User.FindFirstValue(ClaimTypes.Email);
+}
+<!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
     <!-- BEGIN HEADER INNER -->
     <div class="page-header-inner">
@@ -401,7 +406,7 @@
                     <li class="dropdown dropdown-user dropdown-dark">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <span class="username username-hide-on-mobile">
-                                Nick
+                                @userEmail
                             </span>
                             <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
                             <img alt="" class="img-circle" src="~/assets/admin/layout4/img/avatar9.jpg" />
@@ -439,9 +444,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="login.html">
-                                    <i class="icon-key"></i> Log Out
-                                </a>
+                                <a asp-action="SignOut" asp-controller="Account"><i class="icon-key"></i> Log Out</a>
                             </li>
                         </ul>
                     </li>
