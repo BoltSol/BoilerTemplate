@@ -33,7 +33,7 @@ namespace AppService.Users
             if (!string.IsNullOrEmpty(input.EmailAddress) && string.IsNullOrEmpty(input.Password)) return null;
 
             var output = new UserLoggedinOutputDto();
-            var user = await _userRepository.GetAll().Include(x => x.UserRoles).FirstOrDefaultAsync(x => x.EmailAddress == input.EmailAddress && x.Password == input.EncryptedPassword);
+            var user = await _userRepository.GetAll().Include(x => x.UserRoles).ThenInclude(c => c.Role).FirstOrDefaultAsync(x => x.EmailAddress == input.EmailAddress && x.Password == input.EncryptedPassword);
             if (user is null) return null;
 
             user.Password = null;
